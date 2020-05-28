@@ -21,7 +21,7 @@
 		<slf4j.simple.version>1.7.26</slf4j.simple.version>
 		<commons.lang.version>3.9</commons.lang.version>
 		<guava.version>27.1-jre</guava.version>
-		<hibernate.version>6.0.16.Final</hibernate.version>
+		<hibernate.version>6.1.0.Final</hibernate.version>
 		<mockito.version>2.27.0</mockito.version>
 		<hamcrest.version>2.1</hamcrest.version>
 		<assertj.version>3.12.2</assertj.version>
