@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/style.css" type="text/css">
+    <script type="text/javascript" src="js/bootstrap.js"></script>
+<title>社員情報変更</title>
+<% String userid=request.getParameter("userid");
+String name=request.getParameter("name");
+String password=request.getParameter("password");
+String role=request.getParameter("role");
+String beforeuserid=userid;
+
+
+%>
+<style type="text/css">
+.card{
+margin-right: auto;
+margin-left : auto;
+margin-top : 100px;
+margin-bottom : auto;
+width:350px;
+}
+.submit {
+
+    position: absolute;
+
+    right: 0;
+
+    bottom: 0;
+
+}
+.modoru {
+
+    position: absolute;
+
+    left: 0;
+
+    bottom: 0;
+
+}
+
+</style>
+<title>ユーザ情報変更</title>
+
+</head>
+<body>
+<div class="card ">
+  <div class="card-body">
+   <h3>ユーザ情報変更</h3>
+<form action="changeuserconf.jsp" method="post">
+<input type="text" value="<%=userid %>" name="userid" placeholder="ユーザID"><br><br>
+<input type="text" value="<%=name %>" name="name" placeholder="ユーザ名"><br><br>
+<input type="text" value="<%=password %>" name="password" placeholder="password"><br><br><br>
+<input type="radio" name="yakuwari" value="1"checked> 管理者
+<input type="radio" name="yakuwari" value="2" > 一般
+<input type="hidden" name="beforeuserid" value="<%=beforeuserid %>">
+<input type="submit" class="btn btn-outline-secondary submit" value="変更確認" >
+
+
+
+</form>
+
+  </div>
+</div>
+</body>
+</html>

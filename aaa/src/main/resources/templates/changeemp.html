@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/style.css" type="text/css">
+    <script type="text/javascript" src="js/bootstrap.js"></script>
+<title>社員情報変更</title>
+
+
+
+
+<style type="text/css">
+.card{
+margin-right: auto;
+margin-left : auto;
+margin-top : 100px;
+margin-bottom : auto;
+width:350px;
+}
+.submit {
+
+    position: absolute;
+
+    right: 0;
+
+    bottom: 0;
+
+}
+.modoru {
+
+    position: absolute;
+
+    left: 0;
+
+    bottom: 0;
+
+}
+
+</style>
+<title>社員情報変更</title>
+
+</head>
+<body>
+<div class="card ">
+  <div class="card-body">
+   <h3>社員情報変更</h3>
+<form action="changeempconf" method="post">
+<input type="text" th:value="${syainno}" name="syainno"><br><br>
+<input type="text" th:value="${name}" name="name"><br><br>
+<input type="text" th:value="${department}" name="department"><br><br><br>
+<input type="hidden" name="beforesyainno" th:value="${beforesyainno}">
+<input type="submit" class="btn btn-outline-secondary submit" value="変更確認" >
+
+
+
+</form>
+
+  </div>
+</div>
+</body>
+</html>

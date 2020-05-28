@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+<% %>
+<meta charset="UTF-8">
+<title>削除情報確認</title>
+<%int role=Integer.parseInt(request.getParameter("role")); 
+String name=request.getParameter("name");
+String userid=request.getParameter("userid");
+
+
+%>
+<style type="text/css">
+.card{
+margin-right: auto;
+margin-left : auto;
+margin-top : 100px;
+margin-bottom : auto;
+width:250px;
+}
+.submit {
+
+    position: absolute;
+
+    right: 0;
+
+    bottom: 0;
+
+}
+.modoru {
+
+    position: absolute;
+
+    left: 0;
+
+    bottom: 0;
+
+}
+
+</style>
+<link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/style.css" type="text/css">
+    <script type="text/javascript" src="js/bootstrap.js"></script>
+</head>
+<body>
+<div class="card ">
+  <div class="card-body">
+<form action="UserDelete" method="post">
+
+
+<br><br>
+<h3>削除内容確認</h3>
+<table class="table table-bordered">
+ 
+  <tbody>
+    <tr>
+      
+      <td>ユーザID</td>
+      <td><%=userid %></td>
+    </tr>
+    <tr>
+      
+      <td>ユーザ名</td>
+      <td><%=name %></td>
+    </tr>
+    <tr>
+      
+      <td>権限</td>
+      <td><% if(role==1){
+        
+    
+    %>
+    <%="管理者" %>
+    <%}else if(role==2){ %>
+    <%="一般" %>
+    <%} %> </td>
+    </tr>
+  </tbody>
+</table>
+<br><br>
+
+<input type="hidden" name="userid" value="<%=userid %>">
+<input type="hidden" name="name" value="<%=name %>">
+<input type="hidden" name="role" value="<%=role %>">
+<input type="submit" value="削除" class="submit btn btn-outline-secondary">
+<input type="button" value="戻る" onclick="history.back()"class="modoru btn btn-outline-secondary">
+</form>
+</div>
+</div>
+</body>
+</html>

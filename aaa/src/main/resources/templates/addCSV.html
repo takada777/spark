@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>社員登録</title>
+<link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/style.css" type="text/css">
+    <script type="text/javascript" src="js/bootstrap.js"></script>
+    <style>
+.serch{
+margin-top:100px;
+margin-left:450px;
+text-align: center;
+}
+.submit{
+margin-top:50px;
+margin-left:500px;
+}
+
+</style>
+</head>
+<body>
+<form action="importcsv.jsp" method="post" enctype="multipart/form-data">
+<p>
+<input type="file" accept=".csv" class="serch" name="file" id="selectFileSample1">
+</p>
+<p>
+<input type="submit"  class="btn btn-outline-secondary submit" value="送信する">
+</p>
+</form>
+</body>
+</html>

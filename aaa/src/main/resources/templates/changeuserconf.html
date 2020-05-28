@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+<% %>
+<meta charset="UTF-8">
+<title>登録情報確認</title>
+<%String userid=request.getParameter("userid");
+String name=request.getParameter("name");
+String password=request.getParameter("password");
+String role=request.getParameter("yakuwari");
+String beforeuserid=request.getParameter("beforeuserid");
+
+
+
+
+%>
+<style type="text/css">
+.card{
+margin-right: auto;
+margin-left : auto;
+margin-top : 100px;
+margin-bottom : auto;
+width:250px;
+}
+.submit {
+
+    position: absolute;
+
+    right: 0;
+
+    bottom: 0;
+
+}
+.modoru {
+
+    position: absolute;
+
+    left: 0;
+
+    bottom: 0;
+
+}
+
+</style>
+<link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/style.css" type="text/css">
+    <script type="text/javascript" src="js/bootstrap.js"></script>
+</head>
+<body>
+<div class="card ">
+  <div class="card-body">
+<form action="UserChange" method="post">
+
+
+<br><br>
+<h3>登録内容確認</h3>
+<table class="table table-bordered">
+ 
+  <tbody>
+    <tr>
+      
+      <td>ユーザID</td>
+      <td><%=userid %></td>
+    </tr>
+    <tr>
+      
+      <td>ユーザ名</td>
+      <td><%=name %></td>
+    </tr>
+    <tr>
+      
+      <td>パスワード</td>
+      <td><%=password %></td>
+    </tr>
+    <tr>
+      
+      <td>権限</td>
+      <td><% 
+      if(Integer.parseInt(role)==1){
+        
+    
+    %>
+    <%="管理者" %>
+    <%}else if(Integer.parseInt(role)==2){ %>
+    <%="一般" %>
+    <%} %></td>
+    </tr>
+  </tbody>
+</table>
+<br><br>
+
+<input type="hidden" value="<%=userid %>" name="userid"><br><br>
+<input type="hidden" value="<%=name %>" name="name"><br><br>
+<input type="hidden" value="<%=role %>" name="role"><br><br>
+<input type="hidden" value="<%=password %>" name="password"><br><br><br>
+<input type="hidden" name="beforeuserid" value="<%=beforeuserid %>">
+<input type="submit" value="変更" class="submit btn btn-outline-secondary">
+<input type="button" value="戻る" onclick="history.back()"class="modoru btn btn-outline-secondary">
+</form>
+</div>
+</div>
+</body>
+</html>

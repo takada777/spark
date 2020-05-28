@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/style.css" type="text/css">
+    <script type="text/javascript" src="js/bootstrap.js"></script>
+<meta charset="UTF-8">
+<style>
+.serch{
+margin:100px;
+text-align: center;
+}
+
+</style>
+<title>ユーザ一覧</title>
+</head>
+<body>
+<form action="SerchID" method="post">
+<input type="text" name="userid" class="serch" placeholder="ユーザIDで検索"  size="30" maxlength="255">
+<input type="submit" class="btn btn-outline-secondary" value="検索" >
+<input type="button" class="btn btn-outline-secondary" value="+" onclick="location.href='adduser.jsp'">
+</form>
+
+<table border="1" class="table">
+<tr><th>ユーザID</th><th>名前</th><th>権限</th><th></th><th></th></tr>
+<%
+
+ArrayList<UserEntity> ua=UABean.getUserArray();
+for(UserEntity uBean : ua){
+    %>
+
+ <tr>
+    <td><%= uBean.getUserid() %></td>
+    <td><%= uBean.getUsername() %></td>
+    <td><% 
+    if(Integer.parseInt(uBean.getRole())==1){ %>
+    <%="管理者" %>
+    <%}else if(Integer.parseInt(uBean.getRole())==2){ %>
+    <%="一般" %>
+    <%} %>
+    
+    </td>
+   
+
+    
+  
+
+
+
+
+
+<td><form action="changeuser.jsp" method="post">
+<input type="hidden" name="userid" value="<%=uBean.getUserid() %>">
+<input type="hidden" name="password" value="<%=uBean.getPasswd() %>">
+<input type="hidden" name="name" value="<%=uBean.getUsername() %>">
+<input type="hidden" name="role" value="<%=uBean.getRole() %>">
+<input type="submit" class="btn btn-outline-secondary" value="変更" ></form></td>
+
+<td><form action="deleteuser.jsp" method="post">
+<input type="hidden" name="userid" value="<%=uBean.getUserid() %>">
+<input type="hidden" name="name" value="<%=uBean.getUsername() %>">
+<input type="hidden" name="role" value="<%=uBean.getRole() %>">
+<input type="submit" class="btn btn-outline-secondary" value="削除" >
+</form>
+</td>
+
+  </tr>
+
+<%
+    
+  }
+%>
+
+
+</table>
+</body>
+</html>

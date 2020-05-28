@@ -1,0 +1,204 @@
+
+
+package jp.co.scc_kk.kensyu.new_employee_training_framework;
+
+import spark.ModelAndView;
+import spark.Spark;
+import spark.template.thymeleaf.ThymeleafTemplateEngine;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
+
+
+public class Application {
+    public static void main(String[] args) {
+        UserDao2 dao = new UserDao2();
+        // public static void serchuser(String userid,String password) {
+
+        // UserEntity uEntity=
+        // }
+        final ThymeleafTemplateEngine templateEngine = new ThymeleafTemplateEngine();
+        Spark.staticFileLocation("/new-employee-training_framework/src/main/resources/templates");
+        Map<String, Object> model = new HashMap<>();
+        // model.put("msg", "Hello World");
+        Spark.get("/login", (request, response) -> new ModelAndView(model, "login"), templateEngine);
+
+        // Spark.after((request, response) -> {
+
+        Spark.post("/login", (request, response) -> new ModelAndView(model, "login"), templateEngine);
+        //// String password = request.queryParams("passwd");
+        // if (dao.login(userid, password)) {
+        // UserEntity uentity = new UserEntity();
+        // uentity = dao.rolecheck(userid, password);
+        // int role = Integer.parseInt(uentity.getRole());
+
+
+        // }
+
+        // });
+        Spark.after("/login", (request, response) -> {
+            String userid = request.queryParams("userid");
+            String password = request.queryParams("passwd");
+            if (dao.login(userid, password)) {
+                UserEntity uentity = new UserEntity();
+                uentity = dao.rolecheck(userid, password);
+                int role = Integer.parseInt(uentity.getRole());
+                if (role == 1) {
+                    response.redirect("/AdminMain");
+                } else if (role == 2) {
+                    response.redirect("/main");
+                } else {
+                    response.redirect("/login");
+                }
+            }
+        });
+
+        Spark.post("/main", (request, response) -> new ModelAndView(model, "main"), templateEngine);
+        Spark.get("/main", (request, response) -> new ModelAndView(model, "main"), templateEngine);
+
+        Spark.before("/emp", (request, response) -> {
+            String syainno = request.queryParams("syainno");
+            // System.out.println(syainno);
+            if (syainno == null) {
+                EmpDao edao = new EmpDao();
+                employeeEntity entity = new employeeEntity();
+                EmpArrayBean EABean = edao.outputEmp();
+
+                model.put("EABean", EABean);
+                ArrayList<employeeEntity> ea = EABean.getEmpArray();
+                // for (employeeEntity eBean : ea) {
+                model.put("ea", ea);
+                // model.put("entity", eBean);
+            } else if (syainno == "") {
+                EmpDao edao = new EmpDao();
+                employeeEntity entity = new employeeEntity();
+                EmpArrayBean EABean = edao.outputEmp();
+
+                model.put("EABean", EABean);
+                ArrayList<employeeEntity> ea = EABean.getEmpArray();
+                // for (employeeEntity eBean : ea) {
+                model.put("ea", ea);
+            } else {
+                int no = Integer.parseInt(syainno);
+                EmpDao edao = new EmpDao();
+                EmpArrayBean EABean = edao.SerchEmp(no);
+                model.put("EABean", EABean);
+                ArrayList<employeeEntity> ea = EABean.getEmpArray();
+                // for (employeeEntity eBean : ea) {
+                model.put("ea", ea);
+
+            }
+            // }
+
+
+        });
+
+        Spark.get("/emp", (request, response) -> new ModelAndView(model, "emp"), templateEngine);
+
+        Spark.post("/emp", (request, response) -> new ModelAndView(model, "emp"), templateEngine);
+        Spark.get("/addemp", (request, response) -> new ModelAndView(model, "addemp"), templateEngine);
+
+        Spark.post("/addempconf", (request, response) -> new ModelAndView(model, "addempconf"), templateEngine);
+
+        // new ModelAndView(model, "login"), templateEngine);
+        Spark.before("/addempconf", (request, response) ->
+
+        {
+            String syainno = request.queryParams("syainno");
+            String name = request.queryParams("name");
+            String department = request.queryParams("department");
+
+            model.put("syainno", syainno);
+            model.put("name", name);
+            model.put("department", department);
+
+        });
+        Spark.before("/completeregister", (request, response) -> {
+            String syainno = request.queryParams("syainno");
+            String name = request.queryParams("name");
+            String department = request.queryParams("department");
+            EmpDao edao = new EmpDao();
+            int no = Integer.parseInt(syainno);
+
+            edao.EmpRegister(no, name, department);
+        });
+        Spark.post("/completeregister", (request, response) -> new ModelAndView(model, "completeregister"),
+                templateEngine);
+
+        Spark.before("/changeemp", (request, response) -> {
+            String syainno = request.queryParams("syainno");
+            String name = request.queryParams("name");
+            String department = request.queryParams("department");
+            String beforesyainno = syainno;
+            model.put("beforesyainno", beforesyainno);
+            model.put("syainno", syainno);
+            model.put("name", name);
+            model.put("department", department);
+        });
+
+        Spark.post("/changeemp", (request, response) -> new ModelAndView(model, "changeemp"), templateEngine);
+
+        Spark.before("/changeempconf", (request, response) -> {
+            String syainno = request.queryParams("syainno");
+            String name = request.queryParams("name");
+            String department = request.queryParams("department");
+            String beforesyainno = request.queryParams("beforesyainno");
+            model.put("syainno", syainno);
+            model.put("name", name);
+            model.put("department", department);
+            model.put("beforesyainno", beforesyainno);
+        });
+        Spark.post("/changeempconf", (request, response) -> new ModelAndView(model, "changeempconf"), templateEngine);
+
+        Spark.before("/completechange", (request, response) -> {
+            String syainno = request.queryParams("syainno");
+            String name = request.queryParams("name");
+            String department = request.queryParams("department");
+            String beforesyainno = request.queryParams("beforesyainno");
+            EmpDao edao = new EmpDao();
+            int no = Integer.parseInt(syainno);
+            int beforeno = Integer.parseInt(beforesyainno);
+
+
+
+            edao.Update(no, name, department, beforeno);
+        });
+        Spark.post("/completechange", (request, response) -> new ModelAndView(model, "completechange"), templateEngine);
+
+        Spark.before("/deleteemp", (request, response) -> {
+            String syainno = request.queryParams("syainno");
+            String name = request.queryParams("name");
+            String department = request.queryParams("department");
+
+
+            model.put("syainno", syainno);
+            model.put("name", name);
+            model.put("department", department);
+        });
+
+        Spark.post("/deleteemp", (request, response) -> new ModelAndView(model, "deleteemp"), templateEngine);
+
+        Spark.before("/completedelete", (request, response) -> {
+            String syainno = request.queryParams("syainno");
+            String name = request.queryParams("name");
+            String department = request.queryParams("department");
+
+            EmpDao edao = new EmpDao();
+            int no = Integer.parseInt(syainno);
+
+
+
+            edao.empdelete(no);
+        });
+        Spark.post("/completedelete", (request, response) -> new ModelAndView(model, "completedelete"), templateEngine);
+
+        Spark.get("/addCSV", (request, response) -> new ModelAndView(model, "aaCSV"), templateEngine);
+
+    }
+
+
+}
+
+

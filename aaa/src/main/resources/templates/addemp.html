@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/style.css" type="text/css">
+    <script type="text/javascript" src="js/bootstrap.js"></script>
+<meta charset="UTF-8">
+<style type="text/css">
+.card{
+margin-right: auto;
+margin-left : auto;
+margin-top : 100px;
+margin-bottom : auto;
+width:350px;
+}
+.submit {
+
+    position: absolute;
+
+    right: 0;
+
+    bottom: 0;
+
+}
+.modoru {
+
+    position: absolute;
+
+    left: 0;
+
+    bottom: 0;
+
+}
+
+</style>
+<title>社員情報登録</title>
+</head>
+<body>
+<div class="card ">
+  <div class="card-body">
+   <h3>社員情報を入力</h3>
+<input type="button" value="戻る" class="btn btn-outline-secondary modoru" onclick="history.back()">
+<form action="addempconf" method="post">
+<input type="text"  class="center-block text" placeholder="社員番号" name="syainno"> <br><br>
+<input type="text" class="center-block text"  placeholder="氏名" name="name"> <br><br>
+<input type="text" class="center-block text"  placeholder="所属部署" name="department"> <br><br><br> <br>
+
+<input type="submit" class="center-block btn btn-outline-secondary submit" value="登録確認" >
+
+
+
+</form>
+
+  </div>
+</div>
+</body>
+</html>

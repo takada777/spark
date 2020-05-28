@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/style.css" type="text/css">
+    <script type="text/javascript" src="js/bootstrap.js"></script>
+<meta charset="UTF-8">
+<style>
+.serch{
+margin:100px;
+text-align: center;
+}
+
+</style>
+<title>従業員一覧</title>
+</head>
+<body>
+<form action="emp" method="post">
+<input type="text" name="syainno" class="serch" placeholder="社員番号で検索"  size="30" maxlength="255">
+<input type="submit" class="btn btn-outline-secondary" value="検索" >
+</form>
+<input type="button" class="btn btn-outline-secondary" value="+" onclick="location.href='addemp'">
+<input type="button"  class="btn btn-outline-secondary" value="+CSV" onclick="location.href='addCSV'">
+<table border="1" class="table">
+<tr><th>社員番号</th><th>名前</th><th>所属</th><th></th><th></th></tr>
+
+
+ <tr th:each="entity:${ea}">
+    <td th:text="${entity.syainno}"></td>
+    <td th:text="${entity.name}"></td>
+    <td th:text="${entity.department}"></td>
+   
+
+    
+  
+
+
+
+
+
+<td><form action="changeemp" method="post">
+<input type="hidden" name="syainno"  th:value="${entity.syainno}">
+<input type="hidden" name="name" th:value="${entity.name}">
+<input type="hidden" name="department" th:value="${entity.department}">
+<input type="submit" class="btn btn-outline-secondary" value="変更" ></form></td>
+
+<td><form action="deleteemp" method="post">
+<input type="hidden" name="syainno" th:value="${entity.syainno}">
+<input type="hidden" name="name" th:value="${entity.name}">
+<input type="hidden" name="department" th:value="${entity.department}">
+<input type="submit" class="btn btn-outline-secondary" value="削除" >
+</form>
+</td>
+
+  </tr>
+
+
+
+
+</table>
+</body>
+</html>
