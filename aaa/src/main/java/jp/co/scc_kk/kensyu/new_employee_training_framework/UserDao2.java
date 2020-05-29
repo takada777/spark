@@ -95,6 +95,7 @@ public class UserDao2 {
             if (rs.next()) {
                 uEntity = new UserEntity();
                 uEntity.setRole(rs.getString("role"));
+                uEntity.setUsername(rs.getString("name"));
 
 
             } else {
@@ -130,10 +131,7 @@ public class UserDao2 {
             uEntity.setUsername(rs.getString("name"));
             uEntity.setRole(rs.getString("role"));
             uEntity.setPasswd(rs.getString("password"));
-            System.out.println(uEntity.getUserid());
-            System.out.println(uEntity.getUsername());
-            System.out.println(uEntity.getPasswd());
-            System.out.println(uEntity.getRole());
+
 
             UABean.addEmpArray(uEntity);
 

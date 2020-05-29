@@ -2,9 +2,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="css/bootstrap.css">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css" type="text/css">
-    <script type="text/javascript" src="js/bootstrap.js"></script>
+    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 <title>社員情報変更</title>
 
 
@@ -51,7 +51,7 @@ width:350px;
 <input type="text" th:value="${department}" name="department"><br><br><br>
 <input type="hidden" name="beforesyainno" th:value="${beforesyainno}">
 <input type="submit" class="btn btn-outline-secondary submit" value="変更確認" >
-
+<input type="button" value="戻る" onclick="history.back()"class="modoru btn btn-outline-secondary">
 
 
 </form>

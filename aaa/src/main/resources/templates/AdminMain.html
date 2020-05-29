@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <title>管理者top</title>
-<link rel="stylesheet" href="css/bootstrap.css">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css" type="text/css">
-    <script type="text/javascript" src="js/bootstrap.js"></script>
+    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <style type="text/css">
     .test{
    text-align:center;
@@ -15,10 +15,11 @@
   -webkit-transform : translate(-50%,-50%);
   transform : translate(-50%,-50%);
     }
+    .pos { position:absolute; top:0%; right:0%; }
     </style>
 </head>
 <body>
-
+<p  th:text="${user}" class="pos"><p>
 
 
 
@@ -30,7 +31,7 @@
       <div class="test">
         <h5 class="card-title">社員情報検索</h5>
         </div>
-         <a href="Serch" class=" stretched-link"></a>
+         <a href="emp" class=" stretched-link"></a>
       </div>
     </div>
   </div>
@@ -41,7 +42,7 @@
       <div class="test">
         <h5 class="card-title">ユーザー検索</h5>
         </div>
-         <a href="SerchUser" class=" stretched-link"></a>
+         <a href="user" class=" stretched-link"></a>
       </div>
     </div>
   </div>

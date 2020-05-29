@@ -2,18 +2,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="css/bootstrap.css">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css" type="text/css">
-    <script type="text/javascript" src="js/bootstrap.js"></script>
+    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 <title>社員情報変更</title>
-<% String userid=request.getParameter("userid");
-String name=request.getParameter("name");
-String password=request.getParameter("password");
-String role=request.getParameter("role");
-String beforeuserid=userid;
 
-
-%>
 <style type="text/css">
 .card{
 margin-right: auto;
@@ -49,13 +42,13 @@ width:350px;
 <div class="card ">
   <div class="card-body">
    <h3>ユーザ情報変更</h3>
-<form action="changeuserconf.jsp" method="post">
-<input type="text" value="<%=userid %>" name="userid" placeholder="ユーザID"><br><br>
-<input type="text" value="<%=name %>" name="name" placeholder="ユーザ名"><br><br>
-<input type="text" value="<%=password %>" name="password" placeholder="password"><br><br><br>
-<input type="radio" name="yakuwari" value="1"checked> 管理者
-<input type="radio" name="yakuwari" value="2" > 一般
-<input type="hidden" name="beforeuserid" value="<%=beforeuserid %>">
+<form action="changeuserconf" method="post">
+<input type="text" th:value="${userid}" name="userid" placeholder="ユーザID"><br><br>
+<input type="text" th:value="${name}" name="name" placeholder="ユーザ名"><br><br>
+<input type="text" th:value="${password}" name="password" placeholder="password"><br><br><br>
+<input type="radio" name="role" value="1"checked> 管理者
+<input type="radio" name="role" value="2" > 一般
+<input type="hidden" name="beforeuserid" th:value="${beforeuserid}">
 <input type="submit" class="btn btn-outline-secondary submit" value="変更確認" >
 
 

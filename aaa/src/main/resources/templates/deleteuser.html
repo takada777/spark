@@ -1,15 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-<% %>
+
 <meta charset="UTF-8">
 <title>削除情報確認</title>
-<%int role=Integer.parseInt(request.getParameter("role")); 
-String name=request.getParameter("name");
-String userid=request.getParameter("userid");
 
-
-%>
 <style type="text/css">
 .card{
 margin-right: auto;
@@ -38,14 +33,14 @@ width:250px;
 }
 
 </style>
-<link rel="stylesheet" href="css/bootstrap.css">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css" type="text/css">
-    <script type="text/javascript" src="js/bootstrap.js"></script>
+    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 </head>
 <body>
 <div class="card ">
   <div class="card-body">
-<form action="UserDelete" method="post">
+<form action="completeuserdelete" method="post">
 
 
 <br><br>
@@ -56,32 +51,27 @@ width:250px;
     <tr>
       
       <td>ユーザID</td>
-      <td><%=userid %></td>
+      <td><p th:text="${userid}"></p></td>
     </tr>
     <tr>
       
       <td>ユーザ名</td>
-      <td><%=name %></td>
+      <td><p th:text="${name}"></p></td>
     </tr>
     <tr>
       
       <td>権限</td>
-      <td><% if(role==1){
-        
-    
-    %>
-    <%="管理者" %>
-    <%}else if(role==2){ %>
-    <%="一般" %>
-    <%} %> </td>
+      <td th:switch="${role}">
+    <p th:case =="1">管理者</p>
+    <p th:case =="2">一般</p></td>
     </tr>
   </tbody>
 </table>
 <br><br>
 
-<input type="hidden" name="userid" value="<%=userid %>">
-<input type="hidden" name="name" value="<%=name %>">
-<input type="hidden" name="role" value="<%=role %>">
+<input type="hidden" name="userid" th:value="${userid}">
+<input type="hidden" name="name" th:value="${name}">
+<input type="hidden" name="role" th:value="${role}">
 <input type="submit" value="削除" class="submit btn btn-outline-secondary">
 <input type="button" value="戻る" onclick="history.back()"class="modoru btn btn-outline-secondary">
 </form>

@@ -1,43 +1,40 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" href="css/bootstrap.css">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css" type="text/css">
-    <script type="text/javascript" src="js/bootstrap.js"></script>
+    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 <meta charset="UTF-8">
 <style>
 .serch{
 margin:100px;
 text-align: center;
 }
-
+.pos { position:absolute; top:0%; right:0%; }
 </style>
 <title>ユーザ一覧</title>
 </head>
 <body>
-<form action="SerchID" method="post">
-<input type="text" name="userid" class="serch" placeholder="ユーザIDで検索"  size="30" maxlength="255">
+<input type="button"  class="btn btn-outline-secondary pos " value="ログアウト" onclick="location.href='login'">
+<form action="user" method="post">
+<input type="text" name="userid" class="user" placeholder="ユーザIDで検索"  size="30" maxlength="255">
 <input type="submit" class="btn btn-outline-secondary" value="検索" >
-<input type="button" class="btn btn-outline-secondary" value="+" onclick="location.href='adduser.jsp'">
+<input type="button" class="btn btn-outline-secondary" value="+" onclick="location.href='adduser'">
+<input type="button"  class="btn btn-outline-secondary" value="+CSV" onclick="location.href='addCSV'">
 </form>
 
 <table border="1" class="table">
 <tr><th>ユーザID</th><th>名前</th><th>権限</th><th></th><th></th></tr>
-<%
 
-ArrayList<UserEntity> ua=UABean.getUserArray();
-for(UserEntity uBean : ua){
-    %>
 
- <tr>
-    <td><%= uBean.getUserid() %></td>
-    <td><%= uBean.getUsername() %></td>
-    <td><% 
-    if(Integer.parseInt(uBean.getRole())==1){ %>
-    <%="管理者" %>
-    <%}else if(Integer.parseInt(uBean.getRole())==2){ %>
-    <%="一般" %>
-    <%} %>
+ <tr th:each="entity:${ua}">
+    <td th:text="${entity.userid}"></td>
+    <td th:text="${entity.username}"></td>
+   
+    <td th:switch="${entity.role}">
+    <p th:case =="1">管理者</p>
+    <p th:case =="2">一般</p>
+   
     
     </td>
    
@@ -49,27 +46,24 @@ for(UserEntity uBean : ua){
 
 
 
-<td><form action="changeuser.jsp" method="post">
-<input type="hidden" name="userid" value="<%=uBean.getUserid() %>">
-<input type="hidden" name="password" value="<%=uBean.getPasswd() %>">
-<input type="hidden" name="name" value="<%=uBean.getUsername() %>">
-<input type="hidden" name="role" value="<%=uBean.getRole() %>">
+<td><form action="changeuser" method="post">
+<input type="hidden" name="userid" th:value="${entity.userid}">
+<input type="hidden" name="password" th:value="${entity.passwd}">
+<input type="hidden" name="name" th:value="${entity.username}">
+<input type="hidden" name="role" th:value="${entity.role}">
 <input type="submit" class="btn btn-outline-secondary" value="変更" ></form></td>
 
-<td><form action="deleteuser.jsp" method="post">
-<input type="hidden" name="userid" value="<%=uBean.getUserid() %>">
-<input type="hidden" name="name" value="<%=uBean.getUsername() %>">
-<input type="hidden" name="role" value="<%=uBean.getRole() %>">
+<td><form action="deleteuser" method="post">
+<input type="hidden" name="userid" th:value="${entity.userid}">
+<input type="hidden" name="name" th:value="${entity.username}">
+<input type="hidden" name="role" th:value="${entity.role}">
 <input type="submit" class="btn btn-outline-secondary" value="削除" >
 </form>
 </td>
 
   </tr>
 
-<%
-    
-  }
-%>
+
 
 
 </table>

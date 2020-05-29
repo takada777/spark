@@ -1,19 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-<% %>
+
 <meta charset="UTF-8">
 <title>登録情報確認</title>
-<%String userid=request.getParameter("userid");
-String name=request.getParameter("name");
-String password=request.getParameter("password");
-String role=request.getParameter("yakuwari");
-String beforeuserid=request.getParameter("beforeuserid");
 
 
 
 
-%>
+
 <style type="text/css">
 .card{
 margin-right: auto;
@@ -42,58 +37,52 @@ width:250px;
 }
 
 </style>
-<link rel="stylesheet" href="css/bootstrap.css">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css" type="text/css">
-    <script type="text/javascript" src="js/bootstrap.js"></script>
+    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 </head>
 <body>
 <div class="card ">
   <div class="card-body">
-<form action="UserChange" method="post">
+<form action="completeuserchange" method="post">
 
 
 <br><br>
-<h3>登録内容確認</h3>
+<h3>変更内容確認</h3>
 <table class="table table-bordered">
  
   <tbody>
     <tr>
       
       <td>ユーザID</td>
-      <td><%=userid %></td>
+      <td><p th:text="${userid}"></p></td>
     </tr>
     <tr>
       
       <td>ユーザ名</td>
-      <td><%=name %></td>
+      <td><p th:text="${name}"></p></td>
     </tr>
     <tr>
       
       <td>パスワード</td>
-      <td><%=password %></td>
+      <td><p th:text="${password}"></p></td>
     </tr>
     <tr>
       
       <td>権限</td>
-      <td><% 
-      if(Integer.parseInt(role)==1){
-        
-    
-    %>
-    <%="管理者" %>
-    <%}else if(Integer.parseInt(role)==2){ %>
-    <%="一般" %>
-    <%} %></td>
+      <td th:switch="${role}">
+    <p th:case =="1">管理者</p>
+    <p th:case =="2">一般</p></td>
     </tr>
   </tbody>
 </table>
 <br><br>
 
-<input type="hidden" value="<%=userid %>" name="userid"><br><br>
-<input type="hidden" value="<%=name %>" name="name"><br><br>
-<input type="hidden" value="<%=role %>" name="role"><br><br>
-<input type="hidden" value="<%=password %>" name="password"><br><br><br>
-<input type="hidden" name="beforeuserid" value="<%=beforeuserid %>">
+<input type="hidden" th:value="${userid}" name="userid"><br><br>
+<input type="hidden" th:value="${name}" name="name"><br><br>
+<input type="hidden" th:value="${role}" name="role"><br><br>
+<input type="hidden" th:value="${password}" name="password"><br><br><br>
+<input type="hidden" th:value="${beforeuserid}" name="beforeuserid">
 <input type="submit" value="変更" class="submit btn btn-outline-secondary">
 <input type="button" value="戻る" onclick="history.back()"class="modoru btn btn-outline-secondary">
 </form>
